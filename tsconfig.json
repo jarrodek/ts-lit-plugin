@@ -1,0 +1,29 @@
+{
+	"include": ["./src"],
+  "exclude": [],
+	"compilerOptions": {
+		"target": "ES2022",
+    "module": "ESNext",
+    "lib": ["ES2022", "DOM"],
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "declaration": true,
+    "declarationMap": true,
+    "incremental": true,
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
+    "exactOptionalPropertyTypes": false,
+    "tsBuildInfoFile": "./.tsbuildinfo",
+    "noImplicitOverride": true,
+		"noUnusedLocals": false,
+		"noUnusedParameters": false
+	}
+}
