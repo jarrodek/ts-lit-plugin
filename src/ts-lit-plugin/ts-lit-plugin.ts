@@ -38,9 +38,10 @@ export class TsLitPlugin {
 
   constructor(
     private prevLangService: LanguageService,
-    public readonly context: LitPluginContext
+    public readonly context: LitPluginContext,
+    litAnalyzer?: LitAnalyzer
   ) {
-    this.litAnalyzer = new LitAnalyzer(context)
+    this.litAnalyzer = litAnalyzer || new LitAnalyzer(context)
   }
 
   // All methods in this file use ...args because these methods should override
