@@ -118,6 +118,7 @@ jobs:
       contents: write
       issues: write
       pull-requests: write
+      id-token: write  # Required for OIDC
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -141,13 +142,6 @@ jobs:
           NEW_VERSION="${{ needs.determine-release.outputs.new-version }}"
           npm version $NEW_VERSION --no-git-tag-version
           git add package.json package-lock.json
-          
-          # Commit version bump
-          # git config --local user.email "action@github.com"
-          # git config --local user.name "GitHub Action"
-          # git add package.json
-          # git commit -m "chore: bump version to $NEW_VERSION"
-          # git push
 
       - uses: qoomon/actions--create-commit@v1
         id: commit
@@ -164,7 +158,7 @@ jobs:
         id: changelog
         run: |
           echo "changelog<<EOF" >> $GITHUB_OUTPUT
-          npx conventional-changelog-cli@latest release --preset conventionalcommits --release-count 1 >> $GITHUB_OUTPUT
+          node scripts/generate-changelog.js >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
       
       - name: Create Release
@@ -178,5 +172,3 @@ jobs:
       
       - name: Publish to npm
         run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} 
